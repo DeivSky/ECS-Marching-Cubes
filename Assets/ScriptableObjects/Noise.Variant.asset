@@ -1,0 +1,31 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4099ab906c9f906489777ef021f4104a, type: 3}
+  m_Name: Noise.Variant
+  m_EditorClassIdentifier: 
+  Value:
+    Seed: 6
+    Octaves: 6
+    Lacunarity: 3
+    Persistence: 0.5
+    Scale: 3.86
+    Weight: 8
+    WeightMultiplier: 9.5
+    Offset:
+      x: 0
+      y: 0
+      z: 0
+    FloorOffset: 10
+    HardFloorHeight: -5
+    HardFloorWeight: 0
+    TerraceHeight: 1
+    TerraceWeight: 0
