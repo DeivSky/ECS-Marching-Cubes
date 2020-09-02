@@ -1,5 +1,5 @@
 # ECS-Marching-Cubes
- Marching cubes in Unity ECS
+ Marching cubes in Unity DOTS
 
 ![Preview 1](https://github.com/DeivSky/ECS-Marching-Cubes/blob/master/docs/preview1.jpg)
 
