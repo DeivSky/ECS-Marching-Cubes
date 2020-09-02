@@ -16,16 +16,16 @@ MonoBehaviour:
     Seed: 6
     Octaves: 6
     Lacunarity: 3
-    Persistence: 0.5
-    Scale: 3.86
-    Weight: 8
-    WeightMultiplier: 9.5
+    Persistence: 0.4
+    Scale: 0.85
+    Weight: 20
+    WeightMultiplier: 1.11
     Offset:
       x: 0
       y: 0
       z: 0
-    FloorOffset: 10
-    HardFloorHeight: -5
+    FloorOffset: 8
+    HardFloorHeight: 0
     HardFloorWeight: 0
-    TerraceHeight: 1
-    TerraceWeight: 0
+    TerraceHeight: 3
+    TerraceWeight: 0.8

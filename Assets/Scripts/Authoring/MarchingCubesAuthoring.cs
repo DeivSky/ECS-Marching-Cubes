@@ -1,4 +1,3 @@
-using System.Collections;
 using System.Collections.Generic;
 using Unity.Entities;
 using Unity.Mathematics;
@@ -19,7 +18,6 @@ namespace MarchingCubes
         public float ViewDistance = 60f;
         [Range(2f, 100f)]
         public float BoundsSize = 20f;
-        [Range(0.001f, 0.999f)]
         public float Surface = 0.5f;
         [Range(2, 100)]
         public int Resolution = 8;
@@ -156,35 +154,35 @@ namespace MarchingCubes
 
         private void March(int3 coord, Mesh mesh)
         {
-            float4[] points = new float4[Resolution * Resolution * Resolution];
-            float spacing = BoundsSize / (Resolution - 1);
-            float3 center = (float3)coord * BoundsSize;
+            float4[] points = new float4[terrain.Resolution * terrain.Resolution * terrain.Resolution];
+            float spacing = terrain.BoundsSize / (terrain.Resolution - 1);
+            float3 center = (float3)coord * terrain.BoundsSize;
 
             int3 xyz = 0;
-            for (xyz.x = 0; xyz.x < Resolution; xyz.x++)
-                for (xyz.y = 0; xyz.y < Resolution; xyz.y++)
-                    for (xyz.z = 0; xyz.z < Resolution; xyz.z++)
+            for (xyz.x = 0; xyz.x < terrain.Resolution; xyz.x++)
+                for (xyz.y = 0; xyz.y < terrain.Resolution; xyz.y++)
+                    for (xyz.z = 0; xyz.z < terrain.Resolution; xyz.z++)
                     {
-                        float3 pos = center + (float3)xyz * spacing - BoundsSize / 2f;
+                        float3 pos = center + (float3)xyz * spacing - terrain.BoundsSize / 2f;
                         float f = noise.Generate(pos);
-                        int i = xyz.x * Resolution * Resolution + xyz.y * Resolution + xyz.z;
+                        int i = xyz.x * terrain.Resolution * terrain.Resolution + xyz.y * terrain.Resolution + xyz.z;
                         points[i] = new float4(pos, f);
                     }
 
             List<float3x3> trianglePoints = new List<float3x3>();
-            for (xyz.x = 0; xyz.x < Resolution - 1; xyz.x++)
-                for (xyz.y = 0; xyz.y < Resolution - 1; xyz.y++)
-                    for (xyz.z = 0; xyz.z < Resolution - 1; xyz.z++)
+            for (xyz.x = 0; xyz.x < terrain.Resolution - 1; xyz.x++)
+                for (xyz.y = 0; xyz.y < terrain.Resolution - 1; xyz.y++)
+                    for (xyz.z = 0; xyz.z < terrain.Resolution - 1; xyz.z++)
                     {
                         for (int i = 0; i < 8; i++)
                         {
                             int3 corner = xyz + tables.Value.CubeCorners[i];
-                            cube[i] = points[corner.x * Resolution * Resolution + corner.y * Resolution + corner.z];
+                            cube[i] = points[corner.x * terrain.Resolution * terrain.Resolution + corner.y * terrain.Resolution + corner.z];
                         }
 
                         int triangulationIndex = 0;
                         for (int i = 0; i < 8; i++)
-                            if (cube[i].w > Surface)
+                            if (cube[i].w > terrain.Surface)
                                 triangulationIndex |= 1 << i;
 
                         triangulationIndex *= 16;
@@ -227,7 +225,7 @@ namespace MarchingCubes
 
         float3 interpolate(float4 a, float4 b)
         {
-            return new float3(a.x, a.y, a.z) + (Surface - a.w) / (b.w - a.w) * (new float3(b.x, b.y, b.z) - new float3(a.x, a.y, a.z));
+            return new float3(a.x, a.y, a.z) + (terrain.Surface - a.w) / (b.w - a.w) * (new float3(b.x, b.y, b.z) - new float3(a.x, a.y, a.z));
         }
 
         private void DestroyChunkHolder()

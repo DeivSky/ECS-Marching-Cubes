@@ -20,7 +20,7 @@ namespace MarchingCubes
 		protected override void OnCreate()
 		{
 			base.OnCreate();
-			ecbSystem = World.GetOrCreateSystem<BeginSimulationEntityCommandBufferSystem>();
+			ecbSystem = World.GetOrCreateSystem<BeginInitializationEntityCommandBufferSystem>();
 
 			var enabledChunksQueryDesc = new EntityQueryDesc
 			{

@@ -67,6 +67,9 @@ namespace MarchingCubes
 
 		void Update()
 		{
+			if (!showCoords && !drawGizmosBounds && !drawGizmosMesh)
+				return;
+
 			Init();
 
 			if (!isInit)

@@ -19,7 +19,7 @@ namespace MarchingCubes
         protected override void OnCreate()
         {
             base.OnCreate();
-            ecbSystem = World.GetOrCreateSystem<EndInitializationEntityCommandBufferSystem>();
+            ecbSystem = World.GetOrCreateSystem<BeginSimulationEntityCommandBufferSystem>();
             marchingTablesPtr = MarchingTables.CreateBlobAssetReference();
             var disabledDirtyChunks = new EntityQueryDesc
             {
